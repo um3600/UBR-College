@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UBR-College</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <script>
+        if (localStorage.getItem("access") !== "true") {
+            window.location.href = "login.html";
+        }
+    </script>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">UBR-College</div>
+        <nav>
+            <a href="./Home.html">Home</a>
+            <a href="./admin.html">Admin</a>
+            <a href="./contact.html">Contact</a>
+
+            <button onclick="logout()" type="button" class="btn btn-daner">Logout
+                <script>
+                    function logout() {
+                        localStorage.removeItem("access");
+                        window.location.href = "index.html";
+                    }
+                </script>
+            </button>
+        </nav>
+    </header>
+
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h2>Welcome to UBR-College </h2>
+            <p>Where learning meets excellence and creativity.</p>
+            <a href="Home.html" class="btn">Learn More</a>
+        </div>
+    </section>
+
+
+    <section class="departments">
+        <div class="dept-container">
+            <h2>Our Departments</h2>
+            <p class="subtitle">Empowering students through diverse academic disciplines</p>
+
+            <div class="dept-cards">
+                <div class="dept-card">
+                    <div class="icon">🔬</div>
+                    <h3>Science</h3>
+                    <p>
+                        Fostering curiosity and analytical thinking in Physics, Chemistry,
+                        and Biology.
+                    </p>
+                </div>
+
+                <div class="dept-card">
+                    <div class="icon">📐</div>
+                    <h3>Mathematics</h3>
+                    <p>
+                        Building strong foundations and enhancing logical problem-solving skills.
+                    </p>
+                </div>
+
+                <div class="dept-card">
+                    <div class="icon">🎨⚽</div>
+                    <h3>Arts & Sports</h3>
+                    <p>
+                        Encouraging creativity, teamwork, and physical fitness through diverse programs.
+                    </p>
+                </div>
+                <div class="dept-card">
+                    <div class="icon">🖥💻</div>
+                    <h3>Computer</h3>
+                    <p>
+                        Building strong foundations and enhancing Computer Skills
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <p>Email: info@UBR-College.edu.pk | Phone: +92 300 1234567</p>
+            <p>&copy; 2026 UBR-College. All rights reserved.</p>
+        </div>
+    </footer>
+    <!-- Bootstrap JS (optional for components like navbar toggle) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+
+</html>
