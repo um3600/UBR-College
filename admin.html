@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="admin.css">
+
 </head>
 <body>
     
@@ -157,10 +160,146 @@
                         <td>10th</td>
                         <td><button class="edit">Edit</button> <button class="delete">Delete</button></td>
                     </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><button id="addStudentBtn" class="add-btn">+ Add Student</button></td>
+                    </tr>
                 </tbody>
             </table>
         </div>
     </section>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  // DELETE BUTTON
+  document.querySelectorAll(".delete").forEach(btn => {
+    btn.addEventListener("click", function () {
+      const row = this.closest("tr");
+      const name = row.children[1].innerText;
+
+      if (confirm(`Delete ${name}?`)) {
+        row.remove();
+      }
+    });
+  });
+
+  // EDIT BUTTON
+  document.querySelectorAll(".edit").forEach(btn => {
+    btn.addEventListener("click", function () {
+      const row = this.closest("tr");
+
+      const name = row.children[1];
+      const classCell = row.children[2];
+
+      const newName = prompt("Enter new name:", name.innerText);
+      const newClass = prompt("Enter new class:", classCell.innerText);
+
+      if (newName && newClass) {
+        name.innerText = newName;
+        classCell.innerText = newClass;
+      }
+    });
+  });
+
+});
+</script>
+<!-- ------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+<div id="addStudentForm" class="modal">
+    <div class="modal-content">
+        <h3>Add New Student</h3>
+
+        <input type="text" id="studentName" placeholder="Student Name">
+        <input type="text" id="studentClass" placeholder="Class">
+
+        <div class="form-actions">
+            <button id="saveStudent" class="save">Save</button>
+            <button id="closeForm" class="cancel">Cancel</button>
+        </div>
+    </div>
+</div>
+    <script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  const tableBody = document.querySelector("tbody");
+  const addBtn = document.getElementById("addStudentBtn");
+  const modal = document.getElementById("addStudentForm");
+  const saveBtn = document.getElementById("saveStudent");
+  const closeBtn = document.getElementById("closeForm");
+
+  let idCount = tableBody.rows.length + 1;
+
+  // OPEN FORM
+  addBtn.onclick = () => modal.style.display = "flex";
+
+  // CLOSE FORM
+  closeBtn.onclick = () => {
+    modal.style.display = "none";
+    clearForm();
+  };
+
+  // SAVE STUDENT
+  saveBtn.onclick = () => {
+    const name = studentName.value.trim();
+    const cls = studentClass.value.trim();
+
+    if (!name || !cls) {
+      alert("Please fill all fields");
+      return;
+    }
+
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${idCount++}</td>
+      <td>${name}</td>
+      <td>${cls}</td>
+      <td>
+        <button class="edit">Edit</button>
+        <button class="delete">Delete</button>
+      </td>
+    `;
+
+    tableBody.appendChild(row);
+    attachActions(row);
+
+    modal.style.display = "none";
+    clearForm();
+  };
+
+  // EDIT & DELETE
+  function attachActions(row) {
+
+    row.querySelector(".delete").onclick = () => {
+      if (confirm("Delete this student?")) row.remove();
+    };
+
+    row.querySelector(".edit").onclick = () => {
+      const nameCell = row.children[1];
+      const classCell = row.children[2];
+
+      const newName = prompt("Enter name", nameCell.innerText);
+      const newClass = prompt("Enter class", classCell.innerText);
+
+      if (newName && newClass) {
+        nameCell.innerText = newName;
+        classCell.innerText = newClass;
+      }
+    };
+  }
+
+  // APPLY TO EXISTING ROWS
+  document.querySelectorAll("tbody tr").forEach(attachActions);
+
+  function clearForm() {
+    studentName.value = "";
+    studentClass.value = "";
+  }
+
+});
+</script>
 
     <!-- Footer -->
     <footer id="contact">
@@ -168,5 +307,7 @@
             <p> 2026 UBR-College Admin Panel. All rights reserved.</p>
         </div>
     </footer>
+        
+
 </body>
 </html>
