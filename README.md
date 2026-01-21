@@ -1,1 +1,1 @@
-https://um3600.github.io/School-Web/
+https://um3600.github.io/UBR-College/
